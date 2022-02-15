@@ -2,7 +2,7 @@
 
 clear
 echo "*---------------------------------*"
-for i in `ls ~/Shell/Databases`
+for i in `ls ./Databases`
 do
 if [[ -d ./Databases ]]
 then
