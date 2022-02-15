@@ -295,7 +295,97 @@ do
             fi
         fi
         ;;
-    'DELETE FROM TABLE');;
+    'DELETE FROM TABLE')
+		clear
+		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo "                        Delete Menu"
+		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		select del in 'DELETE ALL RECORDS' 'DELETE A SINGLE RECORD' 'BACK'
+            do
+                case $del in
+                'DELETE ALL RECORDS')
+		clear
+		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                read -p "Enter the table name to delete from " tableName 
+                if [ -z "$tableName" ]
+                then
+                    echo "This field is required!"
+                else
+                    if [ -f "$tableName" ]
+                    then 
+                        if [ -z "$tableName" ]
+                        then 
+                            echo "$tableName is empty, press enter to continue"
+			    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                        else
+                        sed -i '/^/d' $tableName
+                        echo "All records in table $tableName are successfully deleted, press enter to continue"
+			echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                        fi
+                    else
+                    echo "$tableName table doesn't exist, press enter to continue"
+		    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                    fi 
+                fi
+                ;;
+                 
+                'DELETE A SINGLE RECORD')
+		clear
+		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                read -p "Enter name of table to delete from " tableName
+                if [ -z "$tableName" ]
+                then
+                    echo "This field is required!"
+                else
+                    if [ -f "$tableName" ]
+                    then
+                        if [ -z "$tableName" ]
+                        then
+                            echo "$tableName is empty, press enter to continue"
+			    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                        else
+                            read -p "Enter primary key of the record you want to delete : " pk 
+                            if [ -z "$pk" ]
+                            then
+                                echo "This field is required!"
+                            else
+                                recordnumber=$(tail -n 1 $tableName|cut -d: -f1) 
+                                if [ $pk -le $recordnumber ]
+                                then
+                                       NR=$(awk 'BEGIN{FS=":"}{if ( $1 == "'$pk'" ) print NR}' $tableName 2>>/dev/null)
+                                        if [[ $NR == "" ]]; 
+                                        then
+                                            echo "Record doesn't exist, press enter to continue"
+					    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                                        else
+                                            sed -i ''$NR'd' $tableName 2>>/dev/null
+                                            echo "The record with is successfully deleted, press enter to continue"
+					    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                                        fi
+                                else
+                                    echo "Record isn't found, press enter to continue"
+				    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                                fi
+                            fi
+                        fi
+                    else
+                        echo "Table doesn't exist, press enter to continue"  
+			echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                    fi
+                fi
+                ;;
+                'BACK')
+                    ./../../ListView.sh
+                ;;
+                *)  
+                    echo "Please Select A Valid Option!" 
+		    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                ;;
+            esac
+            done                
+        ;;
+
+
     'BACK') 
         ./../../ListView.sh
 	;;
