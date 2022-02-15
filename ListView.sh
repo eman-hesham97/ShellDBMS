@@ -1,5 +1,8 @@
 #!/bin/bash
 #first menu that appear to user
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "                         Main Menu"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 select choice in "Press 1 to create a Database" "Press 2 to list all Databases" "Press 3 to connect to Database" "Press 4 to drop a Database" "Press 5 to exit"
 do
 case $REPLY in

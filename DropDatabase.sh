@@ -1,15 +1,19 @@
 #!/bin/bash
 clear
+echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
 echo -n "Please enter the database you want to drop:  "
 read dbName
 
-echo "*------------------------------------------------------------*"
+
 if [ -d ./Databases/$dbName ];then
 	rm -r ./Databases/$dbName
-	echo "       Database dropped"
+	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	echo "                       Database dropped"
+	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 else
 	echo "no such database found"
+	echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
 fi
-echo "*-----------------------------------------------------------*"
+
 
 . ./ListView.sh
