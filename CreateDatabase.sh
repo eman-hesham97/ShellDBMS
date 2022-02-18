@@ -6,22 +6,26 @@ read DBName
 exitflag=0
 
 
-while [ $exitflag -eq 0 ];do
+while [[ $exitflag -eq 0 ]]
+do
 
-if [[ $DBName = *\ * ]]; then
+if [[ $DBName = *\ * ]] 
+then
 	echo -e "\e[32m>< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
 	echo -ne "\e[32m Please enter a valid name without white spaces: \e[39m"
 	read DBName
 	continue
 fi
 
-if [ -z $DBName ];then
+if [[ -z $DBName ]]
+then
 echo -e "\e[32m>< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
 echo -ne "\e[32m Please enter a name: \e[39m"
 read DBName
 continue
 fi
-if [ -d ./Databases/$DBName ];then
+if [[ -d ./Databases/$DBName ]]
+then
 	echo -e "\e[32m >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
 	echo -n "\e[32m DB already exist, Please enter another name: \e[39m"
 	read DBName

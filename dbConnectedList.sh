@@ -2,15 +2,15 @@
 typeset -i numFields;
 typeset -i recordnumber;
 typeset -i num;
-flag2=false
+createFlag=false
 flag=true
 echo -e "\e[33m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "                       Database MENU"
 echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
-select opt2 in 'CREATE TABLE' 'LIST TABLES' 'DROP TABLE' 'SELECT FROM TABLE' 'INSERT INTO TABLE' 'DELETE FROM TABLE' 'BACK' 
+select dbChoice in 'Create Table' 'List All Tables' 'Drop Table' 'Select From Table' 'Insert Into Table' 'Delete From Table' 'Exit' 
 do
- case $opt2 in
-    'CREATE TABLE')
+ case $dbChoice in
+    'Create Table')
 		clear
 		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
 		read -p "Please enter a string table name : " tableName   
@@ -32,7 +32,7 @@ do
                     break
                 elif [[ $field =~ ^[a-zA-Z]*$ ]]
                 then
-                    flag2=true
+                    createFlag=true
                     numFields=0
                     num=0;
                     touch $tableName 
@@ -47,7 +47,7 @@ do
                         break
                     elif [[ $field =~ ^[a-zA-Z]*$ ]]
                     then
-                     flag2=true
+                     createFlag=true
                         while [[ "$field" ]]
                         do
                             fieldsarray[$num+1]=$field
@@ -65,9 +65,9 @@ do
                     do
                     echo "Select the datatype of field ${fieldsarray[$i-1]} then press enter: "
 		    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-                    select opt3 in 'Integer' 'Varchar' 
+                    select typeChoice in 'Integer' 'Varchar' 
                     do
-                        case $opt3 in
+                        case $typeChoice in
                         'Integer') 
                             dataType=Integer
                             if [ "$i" == "$numFields" ]
@@ -92,7 +92,7 @@ do
                         esac
                     done
                 done  
-            if [ "$flag2" = true ]
+            if [ "$createFlag" = true ]
             then 
             clear            
             echo  -e "\e[94m Table $tableName is successfully created, press enter to continue"
@@ -110,7 +110,7 @@ do
         fi
         
         ;;
-    'LIST TABLES')
+    'List All Tables')
 		clear
 		echo -e "\e[33m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		echo -e "                      List of Tables" 
@@ -118,7 +118,7 @@ do
         ls
         echo -e "\e[94m press enter to continue\e[39m"
         ;;
-    'DROP TABLE')
+    'Drop Table')
 		clear
 		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
 		read -p "Enter the table name you want to delete : " tableName
@@ -143,15 +143,15 @@ do
             fi  
         fi
         ;;
-    'SELECT FROM TABLE')
+    'Select From Table')
 		clear
 		echo -e "\e[33m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		echo -e "                        Select Menu"
 		echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
-		select pt in 'SELECT ALL RECORDS' 'SELECT SINGLE RECORD' 'BACK'
+		select pt in 'Select All Records In Table' 'Select One Record From Table' 'Exit'
             do
                 case $pt in
-                'SELECT ALL RECORDS')
+                'Select All Records In Table')
                 read -p "Enter the table name that you want to select from  " tableName 
                     if [ -z "$tableName" ]
                     then
@@ -177,7 +177,7 @@ do
                     fi
                 ;;
                 
-                'SELECT SINGLE RECORD')
+                'Select One Record From Table')
                 read -p "Enter the table name that you want to select from  " tableName 
                 if [ -z "$tableName" ]
                 then
@@ -192,7 +192,7 @@ do
                             exit
                         else
                             recordnumber=$(tail -n 1 $tableName|cut -d: -f1) 
-                            # echo $recordnumber
+                            
                             read -p "Enter the primary key that you want to select " pk                      
                             if [ -z "$pk" ]
                             then
@@ -223,7 +223,7 @@ do
                     fi
                 fi
                 ;;
-                'BACK')
+                'Exit')
                     exit
                 ;;
                 *)  
@@ -236,7 +236,7 @@ do
 		
 
 
-    'INSERT INTO TABLE')
+    'Insert Into Table')
 		clear
 		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
 		read -p "Enter name of table to insert data " tableName  
@@ -309,15 +309,15 @@ do
             fi
         fi
         ;;
-    'DELETE FROM TABLE')
+    'Delete From Table')
 		clear
 		echo -e "\e[33m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		echo -e "                        Delete Menu"
 		echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
-		select del in 'DELETE ALL RECORDS' 'DELETE A SINGLE RECORD' 'BACK'
+		select del in 'Delete All Records' 'Delete One Record' 'Exit'
             do
                 case $del in
-                'DELETE ALL RECORDS')
+                'Delete All Records')
 		clear
 		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
                 read -p "Enter the table name to delete from " tableName 
@@ -343,7 +343,7 @@ do
                 fi
                 ;;
                  
-                'DELETE A SINGLE RECORD')
+                'Delete One Record')
 		clear
 		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
                 read -p "Enter name of table to delete from " tableName
@@ -388,7 +388,7 @@ do
                     fi
                 fi
                 ;;
-                'BACK')
+                'Exit')
                     exit
                 ;;
                 *)  
@@ -400,7 +400,8 @@ do
         ;;
 
 
-    'BACK') 
+    'Exit') 
+    echo -e "\e[31m press ctrl+z to exit \e[39m"
         exit
 	;;
     *) clear
