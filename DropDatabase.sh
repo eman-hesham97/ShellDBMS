@@ -7,14 +7,14 @@ read dbName
 
 if [ -d ./Databases/$dbName ];then
 	rm -r ./Databases/$dbName
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	echo "                       Database dropped"
-	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-	echo "<><><><><><><><><><>press enter to continue<><><><><><><><><>"
+	echo -e "\e[31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	echo -e "\e[31m                       Database dropped"
+	echo -e "\e[31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
+	echo -e "\e[32m<><><><><><><><><><>press enter to continue<><><><><><><><><>\e[39m"
 else
 	echo "no such database found"
 	echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
-	echo "<><><><><><><><><><>press enter to continue<><><><><><><><><>"
+	echo -e "\e[32m<><><><><><><><><><>press enter to continue<><><><><><><><><>\e[39m"
 fi
 
 exit
