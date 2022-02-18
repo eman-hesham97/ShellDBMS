@@ -5,7 +5,8 @@ echo -n "Please enter the database you want to drop:  "
 read dbName
 
 
-if [ -d ./Databases/$dbName ];then
+if [[ -d ./Databases/$dbName ]]
+then
 	rm -r ./Databases/$dbName
 	echo -e "\e[31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	echo -e "\e[31m                       Database dropped"
