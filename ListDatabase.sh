@@ -1,5 +1,6 @@
 #!/bin/bash
 clear
+echo "                         ALL DATABASES"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 for i in `ls ./Databases`
 do
@@ -9,4 +10,5 @@ then
 fi
 done
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-. ./ListView.sh
+echo "<><><><><><><><><><>press enter to continue<><><><><><><><><>"
+exit

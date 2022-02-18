@@ -10,10 +10,11 @@ if [ -d ./Databases/$dbName ];then
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	echo "                       Database dropped"
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	echo "<><><><><><><><><><>press enter to continue<><><><><><><><><>"
 else
 	echo "no such database found"
 	echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+	echo "<><><><><><><><><><>press enter to continue<><><><><><><><><>"
 fi
 
-
-. ./ListView.sh
+exit

@@ -31,7 +31,8 @@ else
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	echo "           Database $DBName created successfully"
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	echo "<><><><><><><><><><>press enter to continue<><><><><><><><><>"
 	exitflag=1
 fi
 done
-. ./ListView.sh
+exit

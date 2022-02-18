@@ -10,7 +10,7 @@ case $REPLY in
 	2)./ListDatabase.sh;;
 	3)./ConnectDatabase.sh;;
 	4)./DropDatabase.sh;;
-	5) exit;;
+	5) exit ;;
 	*) echo invalid option;;
 esac
 done
