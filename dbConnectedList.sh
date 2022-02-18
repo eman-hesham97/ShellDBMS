@@ -16,7 +16,7 @@ do
 		read -p "Please enter a string table name : " tableName   
         if [ -z "$tableName" ]
         then 
-            echo "This field is required!"
+            echo -e "\e[31m This field is required!\e[39m"
         elif [[ $tableName =~ ^[a-zA-Z]*$ ]]
          then
             tableNameMeta=".${tableName}metadata"
@@ -28,7 +28,7 @@ do
                 read -p "Enter the Primary field then press enter: " field 
                 if [ -z "$field" ]
                 then 
-                    echo "This field is required!" 
+                    echo -e "\e[31m This field is required!\e[39m" 
                     break
                 elif [[ $field =~ ^[a-zA-Z]*$ ]]
                 then
@@ -43,7 +43,7 @@ do
                     read -p "Enter the fields of the table then press enter: " field  
                     if [ -z "$field" ]
                     then 
-                        echo "This field is required!" 
+                        echo -e "\e[31m This field is required!\e[39m" 
                         break
                     elif [[ $field =~ ^[a-zA-Z]*$ ]]
                     then
@@ -57,7 +57,7 @@ do
                             read -p "Enter the fields of the table then press enter: " field
                         done
                             clear
-                    else    echo "must containes characters only"
+                    else    echo -e "\e[31m must containes characters only\e[39m"
                     fi
                 fi
                 echo ''>> $tableNameMeta
@@ -95,18 +95,18 @@ do
             if [ "$flag2" = true ]
             then 
             clear            
-            echo "Table $tableName is successfully created, press enter to continue"
-	    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+            echo  -e "\e[31m Table $tableName is successfully created, press enter to continue"
+	    echo  -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
             else
               rm  $tableName
               rm  ".${tableName}metadata"
-              echo "error in creating table $tableName, press enter to continue"
-	      echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+              echo  -e "\e[31m error in creating table $tableName, press enter to continue"
+	      echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
              fi
            
             fi 
            else
-             echo "must containes characters only"  
+             echo -e "\e[31m must containes characters only\e[39m"  
         fi
         
         ;;
@@ -123,22 +123,22 @@ do
 		read -p "Enter the table name you want to delete : " tableName
         if [ -z "$tableName" ]
         then
-            echo "This field is required!"
+            echo -e "\e[31m This field is required!\e[39m"
         else
             if [ -f "$tableName" ]
                 then 
                 rm -i $tableName
                 rm -i ".${tableName}metadata"
-		echo "Table deleted successfully, press enter to continue"
-		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+		echo -e "\e[31m Table deleted successfully, press enter to continue"
+		echo -e "\e >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                 if [ -f "$tableName" ] || [ -f ".${tableName}metadata" ] 
                 then
-                    echo "Failed to delete table, press enter to continue"
-		    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                    echo -e "\e[31m Failed to delete table, press enter to continue"
+		    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                 fi
                 else  
-                    echo "Table doesn't exist, press enter to continue"
-		    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                    echo -e "\e[31m Table doesn't exist, press enter to continue"
+		    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
             fi  
         fi
         ;;
@@ -154,14 +154,14 @@ do
                 read -p "Enter the table name that you want to select from  " tableName 
                     if [ -z "$tableName" ]
                     then
-                        echo "This field is required." 
+                        echo -e "\e[31m This field is required.\e[39m" 
                     else
                         if [ -f "$tableName" ]
                         then 
                             if [ -z "$tableName" ]
                             then 
-                                echo "Table $tableName is empty, press enter to continue"
-				echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                                echo -e "\e[31m Table $tableName is empty, press enter to continue"
+				echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                                 exit
                             else
 			    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -170,8 +170,8 @@ do
                             cat $tableName
                             fi
                         else
-                        echo "$tableName table is not exist, press enter to continue"
-			echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                        echo -e "\e[31m $tableName table is not exist, press enter to continue"
+			echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                         fi 
                     fi
                 ;;
@@ -180,14 +180,14 @@ do
                 read -p "Enter the table name that you want to select from  " tableName 
                 if [ -z "$tableName" ]
                 then
-                    echo "This field is required!"
+                    echo -e "\e[31m This field is required!\e[39m"
                 else
                     if [ -f "$tableName" ]
                     then
                         if [ -z "$tableName" ]
                         then 
-                            echo "$tableName Table is empty, press enter to continue"
-			    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                            echo -e "\e[31m $tableName Table is empty, press enter to continue"
+			    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                             exit
                         else
                             recordnumber=$(tail -n 1 $tableName|cut -d: -f1) 
@@ -195,15 +195,15 @@ do
                             read -p "Enter the primary key that you want to select " pk                      
                             if [ -z "$pk" ]
                             then
-                                echo "This field is required!"
+                                echo -e "\e[31m This field is required!\e[39m"
                             else
                                 if [ $pk -le $recordnumber ]
                                 then
                                         NR=$(awk 'BEGIN{FS=":"}{if ( $1 == "'$pk'" ) print NR}' $tableName 2>>/dev/null)
                                         if [[ $NR == "" ]]; 
                                         then
-                                            echo "record doesn't exist, press enter to continue"
-					    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                                            echo -e "\e[31m record doesn't exist, press enter to continue"
+					    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                                         else
 					    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
                                             echo "      Record with primary key $pk from table $tableName"
@@ -211,14 +211,14 @@ do
                                             echo $(awk 'BEGIN{FS=":";}{if ( NR == '$NR' ) print $0 }' $tableName 2>>/dev/null)
                                         fi
                                 else
-                                    echo "please enter a valid primary key"
-				    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                                    echo -e "\e[31m please enter a valid primary key"
+				    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                                 fi
                             fi
                         fi
                     else
-                        echo "$tableName table doesn't exist, press enter to continue" 
-			echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                        echo -e "\e[31m $tableName table doesn't exist, press enter to continue" 
+			echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                     fi
                 fi
                 ;;
@@ -226,8 +226,8 @@ do
                     exit
                 ;;
                 *)  
-                    echo "Please Select A Valid Option!" 
-		    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                    echo -e "\e[31m Please Select A Valid Option!" 
+		    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                 ;;
                 esac
             done
@@ -241,18 +241,18 @@ do
 		read -p "Enter name of table to insert data " tableName  
         if [ -z "$tableName" ]
         then 
-            echo "This field is required!"
+            echo -e "\e[31m This field is required!\e[39m"
         else
             if [ -f "$tableName" ]
             then
                 numFields=$(awk -F: '{numFields = NF}END { print numFields } '<".${tableName}metadata")
                 for((i=1 ;i<=$numFields;i++))
                 do
-                    # echo $flag
+                    
                     read -p "Enter the $(head -n 1 ".${tableName}metadata"|cut -d: -f$i) " data  
                     echo "$(tail -n 1 ".${tableName}metadata"|cut -d: -f$i) " 
                     
-                    # flag=true
+                    
                     case $(tail -n 1 ".${tableName}metadata"|cut -d: -f$i)  in
                     'Varchar')
                         [[ $data =~ ^[a-zA-Z]*$ ]] &&  flag=true || i=$i-1 flag=false
@@ -261,15 +261,15 @@ do
                         [[ $data =~ ^[0-9]+$ ]] && flag=true || i=$i-1 flag=false
                      ;;
                     *)
-                        echo "Data entered, press enter to continue"  
-			echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                        echo -e "\e[31m Data entered, press enter to continue"  
+			echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                  ;;
                   esac
           
 
                     if [ -z "$data" ]
                     then
-                        echo "This field is required!"
+                        echo -e "\e[31m This field is required!\e[39m"
                     if [ "$flag" = true ]
                     then
                         i=$i-1
@@ -284,7 +284,7 @@ do
 				x=`cut -f1 -d: $tableName | grep "^$data$"`
 				if [[ $x = $data ]] ;
 			   	  then flag=false
-			   	  echo "this pk already exist"
+			   	  echo -e "\e[31m this pk already exist\e[39m"
 			  	  exit
 				fi
 			fi
@@ -303,8 +303,8 @@ do
                 done 
                 echo ''>> $tableName
             else
-                echo "$tableName table doesn't exist, press enter to continue" 
-		echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                echo -e "\e[31m $tableName table doesn't exist, press enter to continue" 
+		echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
             fi
         fi
         ;;
@@ -322,22 +322,22 @@ do
                 read -p "Enter the table name to delete from " tableName 
                 if [ -z "$tableName" ]
                 then
-                    echo "This field is required!"
+                    echo -e "\e[31m This field is required!\e[39m"
                 else
                     if [ -f "$tableName" ]
                     then 
                         if [ -z "$tableName" ]
                         then 
-                            echo "$tableName is empty, press enter to continue"
-			    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                            echo -e "\e[31m $tableName is empty, press enter to continue"
+			    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                         else
                         sed -i '/^/d' $tableName
                         echo "All records in table $tableName are successfully deleted, press enter to continue"
 			echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
                         fi
                     else
-                    echo "$tableName table doesn't exist, press enter to continue"
-		    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                    echo -e "\e[31m $tableName table doesn't exist, press enter to continue"
+		    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                     fi 
                 fi
                 ;;
@@ -348,19 +348,19 @@ do
                 read -p "Enter name of table to delete from " tableName
                 if [ -z "$tableName" ]
                 then
-                    echo "This field is required!"
+                    echo -e "\e[31m This field is required!\e[39m"
                 else
                     if [ -f "$tableName" ]
                     then
                         if [ -z "$tableName" ]
                         then
-                            echo "$tableName is empty, press enter to continue"
-			    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                            echo -e "\e[31m $tableName is empty, press enter to continue"
+			    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                         else
                             read -p "Enter primary key of the record you want to delete : " pk 
                             if [ -z "$pk" ]
                             then
-                                echo "This field is required!"
+                                echo -e "\e[31m This field is required!\e[39m"
                             else
                                 recordnumber=$(tail -n 1 $tableName|cut -d: -f1) 
                                 if [ $pk -le $recordnumber ]
@@ -368,22 +368,22 @@ do
                                        NR=$(awk 'BEGIN{FS=":"}{if ( $1 == "'$pk'" ) print NR}' $tableName 2>>/dev/null)
                                         if [[ $NR == "" ]]; 
                                         then
-                                            echo "Record doesn't exist, press enter to continue"
-					    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                                            echo -e "\e[31m Record doesn't exist, press enter to continue"
+					    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                                         else
                                             sed -i ''$NR'd' $tableName 2>>/dev/null
-                                            echo "The record with is successfully deleted, press enter to continue"
-					    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                                            echo -e "\e[31m The record with is successfully deleted, press enter to continue"
+					    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                                         fi
                                 else
-                                    echo "Record isn't found, press enter to continue"
-				    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                                    echo -e "\e[31m Record isn't found, press enter to continue"
+				    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                                 fi
                             fi
                         fi
                     else
-                        echo "Table doesn't exist, press enter to continue"  
-			echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                        echo -e "\e[31m Table doesn't exist, press enter to continue"  
+			echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                     fi
                 fi
                 ;;
@@ -391,8 +391,8 @@ do
                     exit
                 ;;
                 *)  
-                    echo "Please Select A Valid Option!" 
-		    echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+                    echo -e "\e[31m Please Select A Valid Option!" 
+		    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                 ;;
             esac
             done                
@@ -403,8 +403,8 @@ do
         exit
 	;;
     *) clear
-	echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
-        echo "              Please Select A Valid Option!" 
-	echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><";;
+	echo -e "\e[31m >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
+        echo -e "              Please Select A Valid Option!" 
+	echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m";;
     esac 
 done
