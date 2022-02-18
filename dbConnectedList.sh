@@ -223,7 +223,7 @@ do
                 fi
                 ;;
                 'BACK')
-                    ./../../ListView.sh
+                    exit
                 ;;
                 *)  
                     echo "Please Select A Valid Option!" 
@@ -246,7 +246,7 @@ do
             if [ -f "$tableName" ]
             then
                 numFields=$(awk -F: '{numFields = NF}END { print numFields } '<".${tableName}metadata")
-                for((i=1 ;i<$numFields;i++))
+                for((i=1 ;i<=$numFields;i++))
                 do
                     # echo $flag
                     read -p "Enter the $(head -n 1 ".${tableName}metadata"|cut -d: -f$i) " data  
@@ -275,6 +275,19 @@ do
                         i=$i-1
                     fi
                     else
+			if [ "$flag" = false ]
+                        then
+                        continue
+			fi
+			if [[ $i == 1 ]] ; 
+			   then
+				x=`cut -f1 -d: $tableName | grep "^$data$"`
+				if [[ $x = $data ]] ;
+			   	  then flag=false
+			   	  echo "this pk already exist"
+			  	  exit
+				fi
+			fi
                         if [ "$flag" = false ]
                         then
                         continue
@@ -375,7 +388,7 @@ do
                 fi
                 ;;
                 'BACK')
-                    ./../../ListView.sh
+                    exit
                 ;;
                 *)  
                     echo "Please Select A Valid Option!" 
@@ -387,7 +400,7 @@ do
 
 
     'BACK') 
-        ./../../ListView.sh
+        exit
 	;;
     *) clear
 	echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><"
