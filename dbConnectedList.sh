@@ -4,9 +4,9 @@ typeset -i recordnumber;
 typeset -i num;
 flag2=false
 flag=true
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "                       Database MENU"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "\e[33m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "                       Database MENU"
+echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
 select opt2 in 'CREATE TABLE' 'LIST TABLES' 'DROP TABLE' 'SELECT FROM TABLE' 'INSERT INTO TABLE' 'DELETE FROM TABLE' 'BACK' 
 do
  case $opt2 in
@@ -95,7 +95,7 @@ do
             if [ "$flag2" = true ]
             then 
             clear            
-            echo  -e "\e[31m Table $tableName is successfully created, press enter to continue"
+            echo  -e "\e[94m Table $tableName is successfully created, press enter to continue"
 	    echo  -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
             else
               rm  $tableName
@@ -112,10 +112,11 @@ do
         ;;
     'LIST TABLES')
 		clear
-		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-		echo "                      List of Tables" 
-		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo -e "\e[33m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo -e "                      List of Tables" 
+		echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
         ls
+        echo -e "\e[94m press enter to continue\e[39m"
         ;;
     'DROP TABLE')
 		clear
@@ -129,7 +130,7 @@ do
                 then 
                 rm -i $tableName
                 rm -i ".${tableName}metadata"
-		echo -e "\e[31m Table deleted successfully, press enter to continue"
+		echo -e "\e[94m Table deleted successfully, press enter to continue"
 		echo -e "\e >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                 if [ -f "$tableName" ] || [ -f ".${tableName}metadata" ] 
                 then
@@ -144,9 +145,9 @@ do
         ;;
     'SELECT FROM TABLE')
 		clear
-		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-		echo "                        Select Menu"
-		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo -e "\e[33m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo -e "                        Select Menu"
+		echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
 		select pt in 'SELECT ALL RECORDS' 'SELECT SINGLE RECORD' 'BACK'
             do
                 case $pt in
@@ -164,13 +165,13 @@ do
 				echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                                 exit
                             else
-			    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-                            echo "              All records from table $tableName"
-			    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+			    echo -e "\e[94m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                            echo -e "              All records from table $tableName"
+			    echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
                             cat $tableName
                             fi
                         else
-                        echo -e "\e[31m $tableName table is not exist, press enter to continue"
+                        echo -e "\e[31m $tableName table doesn't exist, press enter to continue"
 			echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m"
                         fi 
                     fi
@@ -205,9 +206,9 @@ do
                                             echo -e "\e[31m record doesn't exist, press enter to continue"
 					    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                                         else
-					    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-                                            echo "      Record with primary key $pk from table $tableName"
-					    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+					    echo -e "\e[94m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                                            echo -e "      Record with primary key $pk from table $tableName"
+					    echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
                                             echo $(awk 'BEGIN{FS=":";}{if ( NR == '$NR' ) print $0 }' $tableName 2>>/dev/null)
                                         fi
                                 else
@@ -261,7 +262,7 @@ do
                         [[ $data =~ ^[0-9]+$ ]] && flag=true || i=$i-1 flag=false
                      ;;
                     *)
-                        echo -e "\e[31m Data entered, press enter to continue"  
+                        echo -e "\e[94m Data entered, press enter to continue"  
 			echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                  ;;
                   esac
@@ -310,9 +311,9 @@ do
         ;;
     'DELETE FROM TABLE')
 		clear
-		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-		echo "                        Delete Menu"
-		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo -e "\e[33m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo -e "                        Delete Menu"
+		echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\e[39m"
 		select del in 'DELETE ALL RECORDS' 'DELETE A SINGLE RECORD' 'BACK'
             do
                 case $del in
@@ -332,8 +333,8 @@ do
 			    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                         else
                         sed -i '/^/d' $tableName
-                        echo "All records in table $tableName are successfully deleted, press enter to continue"
-			echo ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><" 
+                        echo -e "\e[94m All records in table $tableName are successfully deleted, press enter to continue"
+			echo -e ">< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                         fi
                     else
                     echo -e "\e[31m $tableName table doesn't exist, press enter to continue"
@@ -372,7 +373,7 @@ do
 					    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                                         else
                                             sed -i ''$NR'd' $tableName 2>>/dev/null
-                                            echo -e "\e[31m The record with is successfully deleted, press enter to continue"
+                                            echo -e "\e[94m The record with is successfully deleted, press enter to continue"
 					    echo -e " >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< >< ><\e[39m" 
                                         fi
                                 else
